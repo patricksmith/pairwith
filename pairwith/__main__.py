@@ -28,12 +28,17 @@ def add_new_pair():
         f.write(','.join([nickname, name, email]))
 
 
+def unset_pair():
+    os.remove(CURRENT_PAIR_FILE)
+
+
 def write_current_pair(pair):
     with open(CURRENT_PAIR_FILE, 'w+') as f:
         f.write('{name} <{email}>'.format(name=pair[1], email=pair[2]))
 
 
 def set_current_pair(pair_name):
+    unset_pair()
     for pair in get_available_pairs():
         if pair[0] == pair_name:
             write_current_pair(pair)
@@ -45,11 +50,15 @@ def main():
         action='store_true', help='List available pairs')
     parser.add_option('-a', '--add', dest='add', default=False,
         action='store_true', help='Add available pair')
+    parser.add_option('-u', '--unpair', dest='unpair', default=False,
+        action='store_true', help='Unset current pair')
     (option, args) = parser.parse_args()
 
     if option.list:
         print_available_pairs()
     elif option.add:
         add_new_pair()
+    elif option.unpair:
+        unset_pair()
     elif args:
         set_current_pair(args[0])
