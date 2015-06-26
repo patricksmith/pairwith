@@ -29,6 +29,8 @@ def add_new_pair():
 
 
 def unset_pair():
+    if not os.path.isfile(CURRENT_PAIR_FILE):
+        return
     os.remove(CURRENT_PAIR_FILE)
 
 
