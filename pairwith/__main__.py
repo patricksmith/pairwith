@@ -8,10 +8,10 @@ CURRENT_PAIR_FILE = os.path.expanduser('~/.current_pair')
 
 def get_available_pairs():
     if not os.path.isfile(PAIRS_FILE):
-        return 
+        return
     with open(PAIRS_FILE, 'r') as f:
         for line in f:
-            yield line.split(',')
+            yield [part.strip() for part in line.split(',')]
 
 
 def print_available_pairs():
@@ -25,7 +25,7 @@ def add_new_pair():
     name = raw_input('Enter full name: ')
     email = raw_input('Enter email: ')
     with open(PAIRS_FILE, 'a+') as f:
-        f.write(','.join([nickname, name, email]))
+        f.write(','.join([nickname, name, email]) + '\n')
 
 
 def unset_pair():
