@@ -1,5 +1,9 @@
 #!/bin/sh
 COAUTHOR=`cat ~/.current_pair`
 FILE=`cat "$1"`
-echo "\n\nCo-Authored-By: $COAUTHOR\n$FILE" > "$1"
+if [ ! -z "$COAUTHOR" ]; then 
+    echo "\n\nCo-Authored-By: $COAUTHOR\n$FILE" > "$1"
+else
+    echo "$FILE" > "$1"
+fi
 
