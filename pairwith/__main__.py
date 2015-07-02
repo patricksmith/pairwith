@@ -17,7 +17,7 @@ def get_available_pairs():
 def print_available_pairs():
     print 'Available pairs:'
     for pair in get_available_pairs():
-        print '\t{}'.format(','.join(pair))
+        print '\t{0:15} {1:}'.format(pair[0], format_pair(pair))
 
 
 def add_new_pair():
@@ -26,6 +26,10 @@ def add_new_pair():
     email = raw_input('Enter email: ')
     with open(PAIRS_FILE, 'a+') as f:
         f.write(','.join([nickname, name, email]) + '\n')
+
+
+def format_pair(pair):
+    return '{name} <{email}>'.format(name=pair[1], email=pair[2])
 
 
 def remove_pair(nickname):
@@ -40,8 +44,7 @@ def remove_pair(nickname):
 
     if found_pair:
         current = get_current_pair()
-        found = '{} <{}>'.format(found_pair[1], found_pair[2])
-        if current == found:
+        if current == format_pair(found_pair):
             unset_pair()
 
 
@@ -53,7 +56,7 @@ def unset_pair():
 
 def write_current_pair(pair):
     with open(CURRENT_PAIR_FILE, 'w+') as f:
-        f.write('{name} <{email}>'.format(name=pair[1], email=pair[2]))
+        f.write(format_pair(pair))
 
 
 def set_current_pair(pair_name):
