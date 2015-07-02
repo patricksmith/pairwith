@@ -29,10 +29,20 @@ def add_new_pair():
 
 
 def remove_pair(nickname):
+    found_pair = None
+    pairs = list(get_available_pairs())
     with open(PAIRS_FILE, 'w') as f:
-        for pair in get_available_pairs():
+        for pair in pairs:
             if pair[0] != nickname:
                 f.write(','.join(pair) + '\n')
+            else:
+                found_pair = pair
+
+    if found_pair:
+        current = get_current_pair()
+        found = '{} <{}>'.format(found_pair[1], found_pair[2])
+        if current == found:
+            unset_pair()
 
 
 def unset_pair():
