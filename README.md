@@ -14,7 +14,14 @@ To install the application, clone this repo and run:
 python setup.py install
 ```
 
-The `Co-Authored-By` tag is added by a Git commit hook, so you'll need to copy the `prepare-commit-msg` file to `.git/hooks/` in every repo you want to use `pairwith` in.
+The `Co-Authored-By` tag is added by a Git commit hook, so you'll need to copy the `prepare-commit-msg` file to `.git/hooks/` in every repo you want to use `pairwith` in. Or, you can create a git template containing the commit hook:
+
+```bash
+$ mkdir -p ~/.git_template/hooks
+$ cp prepare-commit-msg ~/.git_template/hooks
+```
+
+Then, you can run `git init` in a repo to have the commit hook copied to that repo (even if it's not a new repo).
 
 Usage
 -----
