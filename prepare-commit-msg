@@ -1,5 +1,7 @@
 #!/bin/sh
-COAUTHOR=`cat ~/.current_pair`
+if [ -e ~/.current_pair ]; then
+    COAUTHOR=`cat ~/.current_pair`
+fi
 FILE=`cat "$1"`
 FIRSTLINE=$(head -n1 $1)
 
